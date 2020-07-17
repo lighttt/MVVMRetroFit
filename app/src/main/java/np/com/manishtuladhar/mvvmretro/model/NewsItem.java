@@ -1,37 +1,42 @@
 package np.com.manishtuladhar.mvvmretro.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
 
-public class NewsItem implements Parcelable {
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
+public class NewsItem {
+    @SerializedName("source")
+    @Expose
+    private NewsSource source;
+    @SerializedName("author")
+    @Expose
     private String author;
+    @SerializedName("title")
+    @Expose
     private String title;
+    @SerializedName("description")
+    @Expose
     private String description;
+    @SerializedName("url")
+    @Expose
     private String url;
+    @SerializedName("urlToImage")
+    @Expose
+    private String urlToImage;
+    @SerializedName("publishedAt")
+    @Expose
     private String publishedAt;
+    @SerializedName("content")
+    @Expose
     private String content;
 
-    protected NewsItem(Parcel in) {
-        author = in.readString();
-        title = in.readString();
-        description = in.readString();
-        url = in.readString();
-        publishedAt = in.readString();
-        content = in.readString();
+    public NewsSource getSource() {
+        return source;
     }
 
-    public static final Creator<NewsItem> CREATOR = new Creator<NewsItem>() {
-        @Override
-        public NewsItem createFromParcel(Parcel in) {
-            return new NewsItem(in);
-        }
-
-        @Override
-        public NewsItem[] newArray(int size) {
-            return new NewsItem[size];
-        }
-    };
+    public void setSource(NewsSource source) {
+        this.source = source;
+    }
 
     public String getAuthor() {
         return author;
@@ -65,6 +70,14 @@ public class NewsItem implements Parcelable {
         this.url = url;
     }
 
+    public String getUrlToImage() {
+        return urlToImage;
+    }
+
+    public void setUrlToImage(String urlToImage) {
+        this.urlToImage = urlToImage;
+    }
+
     public String getPublishedAt() {
         return publishedAt;
     }
@@ -81,18 +94,4 @@ public class NewsItem implements Parcelable {
         this.content = content;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(author);
-        parcel.writeString(title);
-        parcel.writeString(description);
-        parcel.writeString(url);
-        parcel.writeString(publishedAt);
-        parcel.writeString(content);
-    }
 }

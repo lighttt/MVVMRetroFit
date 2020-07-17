@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -42,7 +41,7 @@ public class NewsItemAdapter extends RecyclerView.Adapter<NewsItemAdapter.NewsVi
     public void onBindViewHolder(@NonNull NewsViewHolder holder, int position) {
         holder.tvName.setText(newsItemArrayList.get(position).getTitle());
         holder.tvDescription.setText(newsItemArrayList.get(position).getDescription());
-        Picasso.get().load(newsItemArrayList.get(position).getUrl()).into(holder.ivNews);
+        Picasso.get().load(newsItemArrayList.get(position).getUrlToImage()).into(holder.ivNews);
     }
 
     @Override

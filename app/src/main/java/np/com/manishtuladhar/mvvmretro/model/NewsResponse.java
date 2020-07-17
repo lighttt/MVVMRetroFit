@@ -1,45 +1,21 @@
 package np.com.manishtuladhar.mvvmretro.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class NewsResponse implements Parcelable {
+public class NewsResponse {
 
+    @SerializedName("status")
+    @Expose
     private String status;
+    @SerializedName("totalResults")
+    @Expose
     private Integer totalResults;
-    private List<NewsItem> articles =null;
-
-    protected NewsResponse(Parcel in) {
-        status = in.readString();
-        if (in.readByte() == 0) {
-            totalResults = null;
-        } else {
-            totalResults = in.readInt();
-        }
-        articles = in.createTypedArrayList(NewsItem.CREATOR);
-    }
-
-    public static final Creator<NewsResponse> CREATOR = new Creator<NewsResponse>() {
-        @Override
-        public NewsResponse createFromParcel(Parcel in) {
-            return new NewsResponse(in);
-        }
-
-        @Override
-        public NewsResponse[] newArray(int size) {
-            return new NewsResponse[size];
-        }
-    };
-
-    public List<NewsItem> getArticles() {
-        return articles;
-    }
-
-    public void setArticles(List<NewsItem> articles) {
-        this.articles = articles;
-    }
+    @SerializedName("articles")
+    @Expose
+    private List<NewsItem> newsItems = null;
 
     public String getStatus() {
         return status;
@@ -57,20 +33,12 @@ public class NewsResponse implements Parcelable {
         this.totalResults = totalResults;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public List<NewsItem> getNewsItems() {
+        return newsItems;
     }
 
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(status);
-        if (totalResults == null) {
-            parcel.writeByte((byte) 0);
-        } else {
-            parcel.writeByte((byte) 1);
-            parcel.writeInt(totalResults);
-        }
-        parcel.writeTypedList(articles);
+    public void setNewsItems(List<NewsItem> articles) {
+        this.newsItems = articles;
     }
+
 }
